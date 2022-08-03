@@ -114,23 +114,23 @@
     </div>
     {{-- edit employee modal end --}}
 
-    <body class="bg-light">
-  <div class="container">
-    <div class="row my-5">
-      <div class="col-lg-12">
-        <div class="card shadow">
-          <div class="card-header bg-danger d-flex justify-content-between align-items-center">
-            <h3 class="text-light">Manage Employees</h3>
-            <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addEmployeeModal"><i
-                class="bi-plus-circle me-2"></i>Add New Employee</button>
-          </div>
-          <div class="card-body" id="show_all_employees">
-            <h1 class="text-center text-secondary my-5">Loading...</h1>
-          </div>
+
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-lg-12">
+                <div class="card shadow">
+                <div class="card-header bg-danger d-flex justify-content-between align-items-center">
+                    <h3 class="text-light">Manage Employees</h3>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addEmployeeModal"><i
+                        class="bi-plus-circle me-2"></i>Add New Employee</button>
+                </div>
+                <div class="card-body" id="show_all_employees">
+                    <h1 class="text-center text-secondary my-5">Loading...</h1>
+                </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> 
