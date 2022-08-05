@@ -138,6 +138,24 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+
+        // ─────────── Fetch All Employee Records From Db Ajax Request ─────
+
+        fetchAllEmployees();
+
+        function fetchAllEmployees(){
+            $.ajax({
+                url: '{{ route('fetchAll')}}',
+                method:'GET',
+                success: function(result){
+                    $("#show_all_employees").html(result);
+                }
+            });
+        }
+
+
+        // ───────────────────── Add New Employee Records Ajax Request ─────
+
         $("#add_employee_form").submit(function(e){
             e.preventDefault();
             const fd = new FormData(this);
@@ -151,7 +169,16 @@
                 processData: false,
                 contentType: false,
                 success:function(result){
-                    console.log(result);
+                    if (result.status == 200) {
+                        Swal.fire(
+                            'Saved!',
+                            'Employee Records Added Sucessfully!',
+                            'success'
+                        )
+                    }
+                    $("#add_employee_btn").text('Add Employee');
+                    $("#add_employee_form")[0].reset();
+                    $("#addEmployeeModal").modal('hide');
                 }
             });
 
