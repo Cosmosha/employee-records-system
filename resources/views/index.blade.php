@@ -150,7 +150,6 @@
                 cache: false,
                 processData: false,
                 contentType: false,
-                dataType: 'json',
                 success:function(result){
                     console.log(result);
                 }

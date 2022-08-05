@@ -2,22 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    public function index(){
+    public function index(Employee $empolyee){
         return view('index');
     }
 
-    //
-    // ──────────────────────────────────────────────────────────────────────────────────────────────────────────── I ──────────
-    //   :::::: H A N D L E   I N S E R   E M P L O Y E E   A J A X   R E Q U E S T : :  :   :    :     :        :          :
-    // ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-    //
+   // ─── Handle Insert Employee Ajax ────────────────────────────────────────────────
 
-    public function  store(){
-        print_r($_POST);
-        print_r($_FILES);
+    public function  store(Request $request){
+        $file = $request->file('avatar');
+        $fileName= time().'.'.$file->getClientOriginalExtension();
+        $file->storeAs('public/images', $fileName);
+
+        $empData = [
+            'first_name' => $request->fname,
+            'last_name' => $request->lname,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'role' => $request->$fileName
+        ];
+
+
+        Employee::create($empData);
+        return response()->json([
+            'status' => 200,
+        ]);
+
     }
 }
