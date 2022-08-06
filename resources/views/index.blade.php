@@ -149,6 +149,7 @@
                 method:'GET',
                 success: function(result){
                     $("#show_all_employees").html(result);
+                    
                 }
             });
         }
