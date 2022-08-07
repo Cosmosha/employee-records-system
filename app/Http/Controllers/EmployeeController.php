@@ -44,7 +44,7 @@ class EmployeeController extends Controller
 
         if ($emps->count() > 0 ) {
             # code...
-            $display .= '<table class="table table-striped table-sm text-center align-middle">
+            $display .= '<table id="example" class="table table-striped table-sm text-center align-middle">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -85,5 +85,19 @@ class EmployeeController extends Controller
         }
     }
 
+    // ─── Handle Edit Employee Records Ajax Request ──────────────────────────────────
+
+    public function edit(Request $request){
+        $id = $request->id;
+        $emp = Employee::find($id);
+        return response()->json($emp);
+    }
+
+
+    // ─── Handle Update Employee Records Ajax Request ────────────────────────────────
+
+    public function update(Request $request){
+        
+    }
 
 }

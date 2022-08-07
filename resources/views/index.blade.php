@@ -43,7 +43,7 @@
             </div>
             <div class="my-2">
                 <label for="post">Post</label>
-                <input type="text" name="post" class="form-control" placeholder="Post" required>
+                <input type="text" name="post" class="form-control" placeholder="Role" required>
             </div>
             <div class="my-2">
                 <label for="avatar">Select Avatar</label>
@@ -146,10 +146,12 @@
         function fetchAllEmployees(){
             $.ajax({
                 url: '{{ route('fetchAll')}}',
-                method:'GET',
+                method:'get',
                 success: function(result){
                     $("#show_all_employees").html(result);
-                    
+                    // $("#example").DataTable({
+                    //     order: [0, 'desc']
+                    // });
                 }
             });
         }
@@ -176,6 +178,7 @@
                             'Employee Records Added Sucessfully!',
                             'success'
                         )
+                        fetchAllEmployees();
                     }
                     $("#add_employee_btn").text('Add Employee');
                     $("#add_employee_form")[0].reset();
@@ -184,6 +187,53 @@
             });
 
         });
+
+        // ─── Edit Employee Records Ajax Request ──────────────────────────
+        $(document).on('click', '.editIcon', function(e){
+            e.preventDefault();
+            let id= $(this).attr('id');
+            $.ajax({
+                url: '{{route('edit')}}',
+                method: 'get',
+                data: {
+                    id: id,
+                    _token: '{{ CSRF_token()}}'
+                },
+                success: function(result){
+
+                    $("#fname").val(result.first_name);
+                    $("#lname").val(result.last_name);
+                    $("#email").val(result.email);
+                    $("#phone").val(result.phone);
+                    $("#post").val(result.role);
+                    $("#avatar").html('<img src="storage/images/'+result.photo+'" width="100" class="img-fluid img-thumbnail">');
+                    $("#emp_id").val(result.id);
+                    $("#emp_avatar").val(result.photo);
+                }
+            });
+        });
+
+
+        // ─── Update Employee Records Ajax Request ────────────────────────
+
+        $("#edit_employee_form").submit(function(e){
+            e.preventDefault();
+            const fd = new FormData(this);
+            $("#edit_employee_btn").text('Updating...');
+            $.ajax({
+                url: '{{route('update')}}',
+                method: 'post',
+                data: fd,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(result){
+                    console.log(result);
+                }
+            });
+        });
+
+
     </script>
 
 </body>
