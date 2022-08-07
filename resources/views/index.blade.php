@@ -264,7 +264,7 @@
                         method: 'post',
                         data: {
                             id: id,
-                            _token: '{{ csrf_token }}'
+                            _token: '{{ CSRF_token()}}'
                         },
                         success: function(result){
                             Swal.fire(
