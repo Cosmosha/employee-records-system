@@ -128,4 +128,17 @@ class EmployeeController extends Controller
         ]);
     }
 
+
+    // ─── Handle Delete Employee Records Ajax Request ────────────────────────────────
+
+    public function delete(Request $request){
+        $id = $request->id;
+        $emp = Employee::find($id);
+        if (Storage::delete('public/images/'.$emp->photo)) {
+            # code...
+            Employee::destroy($id);
+        }
+    }
+
+
 }

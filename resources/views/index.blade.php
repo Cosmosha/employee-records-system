@@ -228,11 +228,56 @@
                 processData: false,
                 contentType: false,
                 success: function(result){
-                    console.log(result);
+                    if (result.status == 200) {
+                        Swal.fire(
+                            'Updated!',
+                            'Employee Records modified Sucessfully!',
+                            'success'
+                        )
+                        fetchAllEmployees();
+                    }
+                    $("#edit_employee_btn").text('Update Employee');
+                    $("#edit_employee_form")[0].reset();
+                    $("#editEmployeeModal").modal('hide');
                 }
             });
         });
 
+
+        // ─── Delete Employee Records Ajax Request ────────────────────────
+
+        $(document).on('click', '.deleteIcon', function(e){
+            e.preventDefault();
+            let id = $(this).attr('id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('delete') }}',
+                        method: 'post',
+                        data: {
+                            id: id,
+                            _token: '{{ csrf_token }}'
+                        },
+                        success: function(result){
+                            Swal.fire(
+                                'Delete!',
+                                'Employee Records has been delete.',
+                                'success'
+                            )
+                            fetchAllEmployees();
+                        }
+                    });
+                }
+            });
+        });
 
     </script>
 
